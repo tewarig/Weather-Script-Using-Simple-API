@@ -18,9 +18,19 @@ humidity=report["main"]["humidity"]
 temp = temp - 273.15
 tempfeels = tempfeels - 273.15
 timezone= report["timezone"]
-hrs=timezone//3600
-min=(timezone - hrs*3600)//60
-print("Tempreture            ",temp)
-print("Tempreture Feels Like ",round(tempfeels,2))
-print("Humidity              ",humidity)
-print("Time Zone             ",hrs,min," GMT ")
+if timezone < 0:
+    hrs = timezone // 3600
+    min = -(timezone - hrs * 3600) // 60
+else:
+    hrs=timezone//3600
+    min=(timezone - hrs*3600)//60
+tempf= temp * 9/5 + 32
+tempfeelsf= tempfeels * 9/5 + 32
+print("Tempreture       ",round(temp,2)," °C  or ",round(tempf,2)," °F")
+print("Tempreture Feels ",round(tempfeels,2)," °C  or ",round(tempfeelsf,2)," °F")
+if tempfeels > 38:
+    print(" Tempreture May Cause Your Beautiful Skin Burn, Avoid Going Outside without Cover and Sunglasses ")
+print("Humidity         ",humidity," % ")
+if humidity > 85:
+    print("Its Likely to Rain Better take Umbrella with You")
+print("Time Zone ",hrs,"Hour",min,"Mins GMT ")
